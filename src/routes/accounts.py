@@ -7,7 +7,6 @@ from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy import select, delete
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import Session, joinedload
 
 from schemas import (
     UserRegistrationRequestSchema,
@@ -300,7 +299,7 @@ async def complete_password_reset(
 @router.post(
     "/login/",
     response_model=UserLoginResponseSchema,
-    status_code=status.HTTP_201_CREATED,
+    status_code=status.HTTP_200_OK,
 )
 async def login_user(
     user_data: UserLoginRequestSchema,
@@ -369,7 +368,7 @@ async def login_user(
 
 
 @router.post(
-    "/refresh/",
+    "/api/v1/accounts/refresh/",
     response_model=TokenRefreshResponseSchema,
     status_code=status.HTTP_200_OK,
 )
